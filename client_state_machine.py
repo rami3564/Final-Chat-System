@@ -47,7 +47,7 @@ class ClientSM:
         
     def play_snake_game(self):
         pygame.init()
-        run_snake_game()
+        run_snake_games()
         pygame.quit()
 
     def disconnect(self):
