@@ -32,9 +32,7 @@ import random
 
 # GUI class for the chat
 class GUI:
-    # constructor method
     def __init__(self, send, recv, sm, s):
-        # chat window which is currently hidden
         self.Window = Tk()
         self.Window.withdraw()
         self.send = send
@@ -51,152 +49,128 @@ class GUI:
         self.login = Toplevel()
         self.login.title("Login")
         self.login.geometry('450x300')
-        self.pls = Label(self.login, 
-                       text = "Please login to continue",
-                       font = "Helvetica 14 bold")
-        self.pls.place(x = 60, y = 65)
-        
-        # Label - username / password
-        self.labelName = Label(self.login,
-                               text = "Username: ",
-                               font = "Helvetica 12")
-        self.labelName.place(x = 90, y = 130)
-        self.labelPwd = Label(self.login, 
-                               text = "Password: ",
-                               font = "Helvetica 12")
-        self.labelPwd.place(x = 90, y = 170)
-        
-        # entry box - username / password
+
+        # Load the background image
+        background_image = PhotoImage(file="C:\\Users\\ramis\\OneDrive - nyu.edu\\Desktop\\Final Final Project\\Final-Chat-System\\background_login.jpg")
+
+
+        # Create a label to display the background image
+        background_label = Label(self.login, image=background_image)
+        background_label.place(x=0, y=0, relwidth=1, relheight=1)
+
+        self.pls = Label(self.login, text="Please login to continue", font="Helvetica 14 bold", bg="white")
+        self.pls.place(x=60, y=65)
+
+        self.labelName = Label(self.login, text="Username: ", font="Helvetica 12", bg="white")
+        self.labelName.place(x=90, y=130)
+        self.labelPwd = Label(self.login, text="Password: ", font="Helvetica 12", bg="white")
+        self.labelPwd.place(x=90, y=170)
+
         self.var_usr_name = StringVar()
-        self.entry_usr_name = Entry(self.login, textvariable = self.var_usr_name)
-        self.entry_usr_name.place(x=180,y=130)
+        self.entry_usr_name = Entry(self.login, textvariable=self.var_usr_name)
+        self.entry_usr_name.place(x=180, y=130)
         self.var_usr_pwd = StringVar()
-        self.entry_usr_pwd = Entry(self.login,textvariable = self.var_usr_pwd, show = '*')
-        self.entry_usr_pwd.place(x=180,y=170)
-        
-        # button - login / registration / quit
-        self.bt_login = Button(self.login, text = 'Login', command = lambda: self.usr_log_in(self.var_usr_name.get(),self.var_usr_pwd.get()))
-        self.bt_login.place(x = 110, y = 230)
-        self.bt_logreg = Button(self.login,text='Registration',command = lambda: self.usr_sign_up())
-        self.bt_logreg.place(x = 180, y = 230)
-        self.bt_logquit = Button(self.login,text='Quit',command = lambda: self.usr_sign_quit())
-        self.bt_logquit.place(x = 290, y = 230)
-        
+        self.entry_usr_pwd = Entry(self.login, textvariable=self.var_usr_pwd, show='*')
+        self.entry_usr_pwd.place(x=180, y=170)
+
+        self.bt_login = Button(self.login, text='Login', command=lambda: self.usr_log_in(self.var_usr_name.get(), self.var_usr_pwd.get()))
+        self.bt_login.place(x=110, y=230)
+        self.bt_logreg = Button(self.login, text='Registration', command=lambda: self.usr_sign_up())
+        self.bt_logreg.place(x=180, y=230)
+        self.bt_logquit = Button(self.login, text='Quit', command=lambda: self.usr_sign_quit())
+        self.bt_logquit.place(x=290, y=230)
+
         self.Window.mainloop()
-    
-    #登录函数
-    def usr_log_in(self,var_usr_name,var_usr_pwd):
-        #输入框获取用户名密码
+
+    def usr_log_in(self, var_usr_name, var_usr_pwd):
         usr_name = var_usr_name
         usr_pwd = var_usr_pwd
-        #从本地字典获取用户信息，如果没有则新建本地数据库
+
         try:
-            with open('usr_info.pickle','rb') as usr_file:
+            with open('usr_info.pickle', 'rb') as usr_file:
                 usrs_info = pickle.load(usr_file)
         except FileNotFoundError:
-            with open('usr_info.pickle','wb') as usr_file:
-                usrs_info = {'admin':'admin'}
+            with open('usr_info.pickle', 'wb') as usr_file:
+                usrs_info = {'admin': 'admin'}
                 pickle.dump(usrs_info, usr_file)
-        
-        #用户名密码不能为空
-        if usr_name == '' or usr_pwd == '' :
-            messagebox.showerror(message = 'Username or password is empty.')
-        
-        #判断用户名和密码是否匹配
+
+        if usr_name == '' or usr_pwd == '':
+            messagebox.showerror(message='Username or password is empty.')
+
         if usr_name in usrs_info:
             if usr_pwd == usrs_info[usr_name]:
-                messagebox.showinfo(message = 'Welcome '+usr_name+'!')
+                messagebox.showinfo(message='Welcome ' + usr_name + '!')
                 self.flag = True
                 self.login_name = usr_name
                 self.gopage = Toplevel(self.login)
                 self.gopage.title("CHATROOM")
                 self.gopage.geometry('450x300')
-                self.wel = Label(self.gopage, 
-                               text = "Welcome to Our Chatroom!",
-                               font = "Helvetica 14 bold")
-                self.wel.place(x = 60, y = 65)
-                self.go = Button(self.gopage,
-                             text = "CONTINUE", 
-                             font = "Helvetica 14 bold", 
-                             command = lambda: self.goAhead(self.login_name))
-                self.go.place(x = 80, y = 120)
+                self.wel = Label(self.gopage, text="Welcome to Our Chatroom!", font="Helvetica 14 bold")
+                self.wel.place(x=60, y=65)
+                self.go = Button(self.gopage, text="CONTINUE", font="Helvetica 14 bold", command=lambda: self.goAhead(self.login_name))
+                self.go.place(x=80, y=120)
             else:
-                messagebox.showerror(message = 'Incorrect password.')   
-        #不在数据库中弹出是否注册的框
+                messagebox.showerror(message='Incorrect password.')
         else:
-            is_signup = messagebox.askyesno(message = 'You have not registered yet, would you like to register now?')
+            is_signup = messagebox.askyesno(message='You have not registered yet, would you like to register now?')
             if is_signup:
                 self.usr_sign_up()
-    
-    #注册函数
+
     def usr_sign_up(self):
-        #确认注册时的相应函数
         def signtoreg():
-            #获取输入框内的内容
             nn = var_new_name.get()
             np = var_new_pwd.get()
             npf = var_new_pwd_confirm.get()
- 
-            #本地加载已有用户信息,如果没有则已有用户信息为空
+
             try:
-                with open('usr_info.pickle','rb') as usr_file:
-                    exist_usr_info=pickle.load(usr_file)
+                with open('usr_info.pickle', 'rb') as usr_file:
+                    exist_usr_info = pickle.load(usr_file)
             except FileNotFoundError:
-                exist_usr_info={}           
-            
-            #检查用户名存在、密码为空、密码前后不一致
+                exist_usr_info = {}
+
             if nn in exist_usr_info:
-                messagebox.showerror('Error!','Username already exists.')
+                messagebox.showerror('Error!', 'Username already exists.')
             elif np == '' or nn == '':
-                messagebox.showerror('Error!','Username or password is empty.')
-            elif np !=npf:
-                messagebox.showerror('Error!','Inconsistent passwords.')
-            #注册信息没有问题则将用户名密码写入数据库
+                messagebox.showerror('Error!', 'Username or password is empty.')
+            elif np != npf:
+                messagebox.showerror('Error!', 'Inconsistent passwords.')
             else:
-                messagebox.showinfo('Registered successfully!','Welcome!')
+                messagebox.showinfo('Registered successfully!', 'Welcome!')
                 self.flag = True
                 self.login_name = nn
-                #注册成功关闭注册框
                 window_sign_up.destroy()
-                exist_usr_info[nn]=np
-                with open('usr_info.pickle','wb') as usr_file:
-                    pickle.dump(exist_usr_info,usr_file)
+                exist_usr_info[nn] = np
+                with open('usr_info.pickle', 'wb') as usr_file:
+                    pickle.dump(exist_usr_info, usr_file)
                 self.gopage = Toplevel(self.login)
                 self.gopage.title("CHATROOM")
                 self.gopage.geometry('450x300')
-                self.wel = Label(self.gopage, 
-                               text = "Welcome to Out Chatroom!",
-                               font = "Helvetica 14 bold")
-                self.wel.place(x = 60, y = 65)
-                self.go = Button(self.gopage,
-                             text = "CONTINUE", 
-                             font = "Helvetica 14 bold", 
-                             command = lambda: self.goAhead(self.login_name))
-                self.go.place(x = 80, y = 120)
-                
-        #新建注册界面
-        window_sign_up=Toplevel(self.login)
+                self.wel = Label(self.gopage, text="Welcome to Our Chatroom!", font="Helvetica 14 bold")
+                self.wel.place(x=60, y=65)
+                self.go = Button(self.gopage, text="CONTINUE", font="Helvetica 14 bold", command=lambda: self.goAhead(self.login_name))
+                self.go.place(x=80, y=120)
+
+        window_sign_up = Toplevel(self.login)
         window_sign_up.geometry('350x200')
         window_sign_up.title('Registration')
-    
-        #用户名变量及标签、输入框
-        var_new_name=StringVar()
-        new_name = Label(window_sign_up, text = 'Username：').place(x=10,y=10)
-        enter_new_name = Entry(window_sign_up, textvariable = var_new_name).place(x=150,y=10)
-        #密码变量及标签、输入框
-        var_new_pwd=StringVar()
-        new_pwd = Label(window_sign_up, text = 'Password：').place(x=10,y=50)
-        enter_new_pwd = Entry(window_sign_up, textvariable = var_new_pwd, show = '*').place(x=150,y=50)    
-        #重复密码变量及标签、输入框
-        var_new_pwd_confirm=StringVar()
-        new_pwd_confirm = Label(window_sign_up, text = 'Confirm Password：').place(x=10,y=90)
-        enter_new_pwd_confirm = Entry(window_sign_up, textvariable = var_new_pwd_confirm, show = '*').place(x=150,y=90)    
-    
-        #确认注册按钮及位置
-        bt_confirm_sign_up = Button(window_sign_up, text='Complete Registration', command = signtoreg)
-        bt_confirm_sign_up.place(x = 150, y = 130)
-        
+
+        var_new_name = StringVar()
+        new_name = Label(window_sign_up, text='Username：').place(x=10, y=10)
+        enter_new_name = Entry(window_sign_up, textvariable=var_new_name).place(x=150, y=10)
+
+        var_new_pwd = StringVar()
+        new_pwd = Label(window_sign_up, text='Password：').place(x=10, y=50)
+        enter_new_pwd = Entry(window_sign_up, textvariable=var_new_pwd, show='*').place(x=150, y=50)
+
+        var_new_pwd_confirm = StringVar()
+        new_pwd_confirm = Label(window_sign_up, text='Confirm Password：').place(x=10, y=90)
+        enter_new_pwd_confirm = Entry(window_sign_up, textvariable=var_new_pwd_confirm, show='*').place(x=150, y=90)
+
+        bt_confirm_sign_up = Button(window_sign_up, text='Complete Registration', command=signtoreg)
+        bt_confirm_sign_up.place(x=150, y=130)
+
         window_sign_up.mainloop()
+    
     
     def usr_sign_quit(self):
         self.login.destroy()
