@@ -166,4 +166,4 @@ def run_snake_games():
         fps.tick(snake_speed)
 
 if __name__ == "__main__":
-    run_game()
+    run_snake__game()
