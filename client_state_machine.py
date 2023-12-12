@@ -131,7 +131,7 @@ class ClientSM:
                         self.out_msg += 'Sonnet ' + poem_idx + ' not found\n\n'
                         
                 elif my_msg[0] == 'snake':
-                self.play_snake_game()
+                    self.play_snake_game()
 
                 else:
                     self.out_msg += menu
