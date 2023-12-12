@@ -50,16 +50,11 @@ class GUI:
         self.login.title("Login")
         self.login.geometry('450x300')
 
-        # Load the background image
-        background_image = PhotoImage(file= "snake.png")
+        
 
-
-        # Create a label to display the background image
-        background_label = Label(self.login, image=background_image)
-        background_label.place(x=0, y=0, relwidth=1, relheight=1)
-
-        self.pls = Label(self.login, text="Please login to continue", font="Comic Sans MS", size=14, weight="bold", bg="white")
+        self.pls = Label(self.login, text="Please login to continue", font="Comic Sans MS", size=14, weight="bold")
         self.pls.place(x=60, y=65)
+        
 
         self.labelName = Label(self.login, text="Username: ", font="Comic Sans MS", size=12, bg="white")
         self.labelName.place(x=90, y=130)
