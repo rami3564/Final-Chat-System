@@ -3,10 +3,16 @@ Created on Sun Apr  5 00:00:32 2015
 
 @author: zhengzhang
 """
+import os
+os.environ['SDL_VIDEODRIVER'] = 'dummy'
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
+
 from chat_utils import *
 import json
 from cryptography.fernet import Fernet # Requires cryptography to be installed
 import pygame
+
+from snake import run_snake_games
 
 
 class ClientSM:
@@ -46,9 +52,7 @@ class ClientSM:
         return(False)
         
     def play_snake_game(self):
-        pygame.init()
-        run_snake_game()
-        pygame.quit()
+        run_snake_games()
 
     def disconnect(self):
         msg = json.dumps({"action":"disconnect"})
@@ -130,7 +134,7 @@ class ClientSM:
                     else:
                         self.out_msg += 'Sonnet ' + poem_idx + ' not found\n\n'
                         
-                elif my_msg[0] == 'snake':
+                elif my_msg == 'snake':
                     self.play_snake_game()
 
                 else:
