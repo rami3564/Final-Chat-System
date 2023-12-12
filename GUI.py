@@ -51,7 +51,7 @@ class GUI:
         self.login.geometry('450x300')
 
         # Load the background image
-        background_image = PhotoImage(file="C:\\Users\\ramis\\OneDrive - nyu.edu\\Desktop\\Final Final Project\\Final-Chat-System\\background_login.jpg")
+        background_image = PhotoImage(file="background_login.jpg")
 
 
         # Create a label to display the background image
