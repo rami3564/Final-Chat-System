@@ -6,6 +6,7 @@ Created on Sun Apr  5 00:00:32 2015
 from chat_utils import *
 import json
 from cryptography.fernet import Fernet # Requires cryptography to be installed
+import pygame
 
 
 class ClientSM:
@@ -43,6 +44,11 @@ class ClientSM:
         else:
             self.out_msg += 'User is not online, try again later\n'
         return(False)
+        
+    def play_snake_game(self):
+        pygame.init()
+        run_snake_game()
+        pygame.quit()
 
     def disconnect(self):
         msg = json.dumps({"action":"disconnect"})
@@ -123,9 +129,13 @@ class ClientSM:
                         self.out_msg += poem + '\n\n'
                     else:
                         self.out_msg += 'Sonnet ' + poem_idx + ' not found\n\n'
+                        
+                elif my_msg[0] == 'snake':
+                self.play_snake_game()
 
                 else:
                     self.out_msg += menu
+                    
 
             if len(peer_msg) > 0:
                 peer_msg = json.loads(peer_msg)
