@@ -51,19 +51,19 @@ class GUI:
         self.login.geometry('450x300')
 
         # Load the background image
-        background_image = PhotoImage(file="C:\\Users\\ramis\\OneDrive - nyu.edu\\Desktop\\Final Final Project\\Final-Chat-System\\background_login.jpg")
+        background_image = PhotoImage(file="background_login.jpg")
 
 
         # Create a label to display the background image
         background_label = Label(self.login, image=background_image)
         background_label.place(x=0, y=0, relwidth=1, relheight=1)
 
-        self.pls = Label(self.login, text="Please login to continue", font="Helvetica 14 bold", bg="white")
+        self.pls = Label(self.login, text="Please login to continue", font="Comic Sans MS", size=14, weight="bold", bg="white")
         self.pls.place(x=60, y=65)
 
-        self.labelName = Label(self.login, text="Username: ", font="Helvetica 12", bg="white")
+        self.labelName = Label(self.login, text="Username: ", font="Comic Sans MS", size=12, bg="white")
         self.labelName.place(x=90, y=130)
-        self.labelPwd = Label(self.login, text="Password: ", font="Helvetica 12", bg="white")
+        self.labelPwd = Label(self.login, text="Password: ", font="Comic Sans MS", size=12, bg="white")
         self.labelPwd.place(x=90, y=170)
 
         self.var_usr_name = StringVar()
@@ -105,9 +105,9 @@ class GUI:
                 self.gopage = Toplevel(self.login)
                 self.gopage.title("CHATROOM")
                 self.gopage.geometry('450x300')
-                self.wel = Label(self.gopage, text="Welcome to Our Chatroom!", font="Helvetica 14 bold")
+                self.wel = Label(self.gopage, text="Welcome to Our Chatroom!", font="Comic Sans MS", size=14, weight="bold")
                 self.wel.place(x=60, y=65)
-                self.go = Button(self.gopage, text="CONTINUE", font="Helvetica 14 bold", command=lambda: self.goAhead(self.login_name))
+                self.go = Button(self.gopage, text="CONTINUE",font="Comic Sans MS", size=14, weight="bold", command=lambda: self.goAhead(self.login_name))
                 self.go.place(x=80, y=120)
             else:
                 messagebox.showerror(message='Incorrect password.')
@@ -145,9 +145,9 @@ class GUI:
                 self.gopage = Toplevel(self.login)
                 self.gopage.title("CHATROOM")
                 self.gopage.geometry('450x300')
-                self.wel = Label(self.gopage, text="Welcome to Our Chatroom!", font="Helvetica 14 bold")
+                self.wel = Label(self.gopage, text="Welcome to Our Chatroom!", font="Comic Sans MS", size=14, weight="bold")
                 self.wel.place(x=60, y=65)
-                self.go = Button(self.gopage, text="CONTINUE", font="Helvetica 14 bold", command=lambda: self.goAhead(self.login_name))
+                self.go = Button(self.gopage, text="CONTINUE", font="Comic Sans MS", size=14, weight="bold", command=lambda: self.goAhead(self.login_name))
                 self.go.place(x=80, y=120)
 
         window_sign_up = Toplevel(self.login)
@@ -212,7 +212,7 @@ class GUI:
                              bg = "#17202A", 
                               fg = "#EAECEE",
                               text = self.name ,
-                               font = "Helvetica 13 bold",
+                               font="Comic Sans MS", size=13, weight="bold",
                                pady = 5)
           
         self.labelHead.place(relwidth = 1)
@@ -229,7 +229,7 @@ class GUI:
                              height = 2,
                              bg = "#17202A",
                              fg = "#EAECEE",
-                             font = "Helvetica 14", 
+                             font="Comic Sans MS", size=14, 
                              padx = 5,
                              pady = 5)
           
@@ -247,7 +247,7 @@ class GUI:
         self.entryMsg = Entry(self.labelBottom,
                               bg = "#2C3E50",
                               fg = "#EAECEE",
-                              font = "Helvetica 13")
+                              font="Comic Sans MS", size=13)
           
         # place the given widget
         # into the gui window
@@ -261,7 +261,7 @@ class GUI:
         # create a Send Button
         self.buttonMsg = Button(self.labelBottom,
                                 text = "Send",
-                                font = "Helvetica 10 bold", 
+                                font="Comic Sans MS", size=10, weight="bold", 
                                 width = 20,
                                 bg = "#ABB2B9",
                                 command = lambda : self.sendButton(self.entryMsg.get()))
