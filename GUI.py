@@ -186,27 +186,40 @@ class GUI:
     # The main layout of the chat
     def layout(self, name):
         self.name = name
-        # to show chat window
         self.Window.deiconify()
         self.Window.title("CHATROOM")
         self.Window.resizable(width=False, height=False)
         self.Window.configure(width=470, height=550, bg="#17202A")
+        
+        # Header
         self.labelHead = Label(self.Window, bg="#17202A", fg="#EAECEE", text=self.name,
                                font=("Comic Sans MS", 13, "bold"), pady=5)
         self.labelHead.place(relwidth=1)
+        
+        # Separator Line
         self.line = Label(self.Window, width=450, bg="#ABB2B9")
         self.line.place(relwidth=1, rely=0.07, relheight=0.012)
+        
+        # Chat Display
         self.textCons = Text(self.Window, width=20, height=2, bg="#17202A", fg="#EAECEE",
                              font=("Comic Sans MS", 14), padx=5, pady=5)
         self.textCons.place(relheight=0.745, relwidth=1, rely=0.08)
+        
+        # Bottom Label
         self.labelBottom = Label(self.Window, bg="#ABB2B9", height=80)
         self.labelBottom.place(relwidth=1, rely=0.825)
+        
+        # Message Entry
         self.entryMsg = Entry(self.labelBottom, bg="#2C3E50", fg="#EAECEE", font=("Comic Sans MS", 13))
         self.entryMsg.place(relwidth=0.74, relheight=0.06, rely=0.008, relx=0.011)
         self.entryMsg.focus()
+        
+        # Send Button
         self.buttonMsg = Button(self.labelBottom, text="Send", font=("Comic Sans MS", 10, "bold"),
                                 width=20, bg="#ABB2B9", command=lambda: self.sendButton(self.entryMsg.get()))
         self.buttonMsg.place(relx=0.77, rely=0.008, relheight=0.06, relwidth=0.22)
+        
+        # Text Configuration
         self.textCons.config(cursor="arrow")
         scrollbar = Scrollbar(self.textCons)
         scrollbar.place(relheight=1, relx=0.974)
