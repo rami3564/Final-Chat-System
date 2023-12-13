@@ -9,14 +9,21 @@ CHAT_IP = '127.0.0.1'
 CHAT_PORT = 1112
 SERVER = (CHAT_IP, CHAT_PORT)
 
-menu = "\n++++ Choose one of the following commands\n \
-        time: calendar time in the system\n \
-        who: to find out who else are there\n \
-        c _peer_: to connect to the _peer_ and chat\n \
-        ? _term_: to search your chat logs where _term_ appears\n \
-        p _#_: to get number <#> sonnet\n \
-        snake: to play the Snake game\n \
-        q: to leave the chat system\n\n"
+menu = """
+
+Menu:
+++++ Choose one of the following commands
+
+time:     - Calendar time in the system 🕒
+who:      - Find out who else is there 🧑‍💻
+c _peer_: - Connect to the _peer_ and chat 💬
+? _term_: - Search your chat logs where _term_ appears 🔍
+p _#_:    - Get number <#> sonnet 📜
+e_emotion_- Emojis for your emotion 😄
+snake:    - Play the Snake game 🐍
+q:        - Leave the chat system 🚪
+"""
+
 
 S_OFFLINE   = 0
 S_CONNECTED = 1

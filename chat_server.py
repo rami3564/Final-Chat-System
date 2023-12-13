@@ -14,6 +14,7 @@ import json
 import pickle as pkl
 from chat_utils import *
 import chat_group as grp
+import emoji
 
 class Server:
     def __init__(self):
@@ -146,6 +147,12 @@ class Server:
                 poem = '\n'.join(poem).strip()
                 print('here:\n', poem)
                 mysend(from_sock, json.dumps({"action":"poem", "results":poem}))
+            
+            #Emojis
+            elif msg["action"] == "emoji":
+                emoji_resultt = emoji.emojize(emoji_resullt)
+                mysend(from_sock, json.dumps({"action":"emoji", "results":emoji_extract}))
+
 #==============================================================================
 #                 time
 #==============================================================================
