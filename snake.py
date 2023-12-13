@@ -85,6 +85,7 @@ def run_snake_games():
         quit()
 
     # Main loop
+    fruit_spawn = True
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -132,8 +133,6 @@ def run_snake_games():
         if not fruit_spawn:
             fruit_position = [random.randrange(1, (window_x // 10)) * 10,
                               random.randrange(1, (window_y // 10)) * 10]
-
-        fruit_spawn = True
         game_window.blit(background, (0, 0))
 
         for pos in snake_body:
@@ -166,4 +165,4 @@ def run_snake_games():
         fps.tick(snake_speed)
 
 if __name__ == "__main__":
-    run_game()
+    run_snake_games()

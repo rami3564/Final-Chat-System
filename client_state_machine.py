@@ -3,12 +3,14 @@ Created on Sun Apr  5 00:00:32 2015
 
 @author: zhengzhang
 """
+import os
+os.environ['SDL_VIDEODRIVER'] = 'dummy'
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
+
 from chat_utils import *
 import json
 from cryptography.fernet import Fernet # Requires cryptography to be installed
 import pygame
-import emoji
-
 
 
 class ClientSM:
@@ -48,9 +50,7 @@ class ClientSM:
         return(False)
         
     def play_snake_game(self):
-        pygame.init()
-        run_snake_game()
-        pygame.quit()
+        run_snake_games()
 
     def disconnect(self):
         msg = json.dumps({"action":"disconnect"})
@@ -131,36 +131,7 @@ class ClientSM:
                         self.out_msg += poem + '\n\n'
                     else:
                         self.out_msg += 'Sonnet ' + poem_idx + ' not found\n\n'
-                elif my_msg[0] == 'e_' and my_msg[1:] == "cry":
-                    emoji_result = emoji.emojize("😥")
-                    self.out_msg += emoji_result + "\n\n"
-                
-                elif my_msg[0] == 'e_' and my_msg[1:] == "happy":
-                    emoji_result = emoji.emojize("😄")
-                    self.out_msg += emoji_result + "\n\n"
-                
-                elif my_msg[0] == 'e_' and my_msg[1:] == "love":
-                    emoji_result = emoji.emojize("😍")
-                    self.out_msg += emoji_result + "\n\n"
-                
-                elif my_msg[0] == 'e_' and my_msg[1:] == "sad":
-                    emoji_result = emoji.emojize("😢")
-                    self.out_msg += emoji_result + "\n\n"
-                
-                elif my_msg[0] == 'e_' and my_msg[1:] == "angry":
-                    emoji_result = emoji.emojize("😡")
-                    self.out_msg += emoji_result + "\n\n"
-                
-                elif my_msg[0] == 'e_' and my_msg[1:] == "laugh":
-                    emoji_result = emoji.emojize("😂")
-                    self.out_msg += emoji_result + "\n\n"
-
-                elif my_msg[0] == 'e_' and my_msg[1:] == "celebrate":
-                    emoji_result = emoji.emojize("🎉")
-                    self.out_msg += emoji_result + "\n\n"
-
-
-
+                        
                 elif my_msg[0] == 'snake':
                     self.play_snake_game()
 
