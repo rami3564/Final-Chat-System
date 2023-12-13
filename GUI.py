@@ -169,6 +169,8 @@ class GUI:
             process.start()
     # The main layout of the chat
     def layout(self, name):
+        #add layout
+        
         
         
 
