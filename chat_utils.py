@@ -14,14 +14,16 @@ menu = """
 Menu:
 ++++ Choose one of the following commands
 
-time:     - Calendar time in the system 🕒
-who:      - Find out who else is there 🧑‍💻
-c _peer_: - Connect to the _peer_ and chat 💬
-? _term_: - Search your chat logs where _term_ appears 🔍
-p _#_:    - Get number <#> sonnet 📜
-e_emotion_- Emojis for your emotion 😄
-snake:    - Play the Snake game 🐍
-q:        - Leave the chat system 🚪
+time:     - Check the system's calendar; time flies when you're chatting ⌛
+who:      - Unveil the mystery of who's behind the screen 🕵️‍♂️
+c _peer_: - Dive into the abyss and chat with your digital confidante 💬
+? _term_: - Summon the chat logs oracle to find where _term_ went 🔮
+p _#_:    - Order a sonnet; because Shakespeare knew the art of chat poetry 📜
+e_emotion_- Spice up your messages with emojis; express, impress, confess 😄
+snake:    - Dodge responsibilities with a round of the Snake game 🐍
+q:        - Make a swift exit; let the chat drama unfold without you 🚪
+
+
 """
 
 

@@ -38,7 +38,7 @@ class GUI:
         self.socket = s
         self.my_msg = ""
         self.system_msg = ""
-        
+
     def login(self):
         self.flag = False
         self.login_name = ''
@@ -169,6 +169,11 @@ class GUI:
             process.start()
     # The main layout of the chat
     def layout(self, name):
+        smirk = '\U0001F60F'
+        cry = '\U0001F62D'
+        laugh = '\U0001F602'
+        angry = '\U0001F620'
+        
         self.name = name
         # to show chat window
         self.Window.deiconify()
@@ -245,14 +250,14 @@ class GUI:
           
 
         #============================ emoji ===========================================
-        self.buttonEmoji = Button(self.labelBottom,
-                                text="\U0001f612",
+        self.buttonEmoji_cry = Button(self.labelBottom,
+                                text= smirk,
                                 font="Helvetica 10 bold",
                                 width=20,
                                 bg="#ABB2B9",
-                                command=lambda: self.sendButton("emoji"))
+                                command=lambda: self.sendButton(smirk))
 
-        self.buttonEmoji.place(relx=0.6,
+        self.buttonEmoji_cry.place(relx=0.6,
                              rely=0.008,
                              relheight=0.06,
                              relwidth=0.22)

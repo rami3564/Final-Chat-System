@@ -95,7 +95,7 @@ class ClientSM:
                     mysend(self.s, json.dumps({"action":"time"}))
                     time_in = json.loads(myrecv(self.s))["results"]
                     # Time is" time_in + clock emoji 
-                    self.out_msg += "Time is: " + time_in + "🕒\n\n"
+                    self.out_msg += "Time is: " + time_in + " 🕒\n\n"
 
                 elif my_msg == 'who':
                     mysend(self.s, json.dumps({"action":"list"}))
@@ -159,10 +159,11 @@ class ClientSM:
             if len(peer_msg) > 0:
                 peer_msg = json.loads(peer_msg)
                 if peer_msg["action"] == "connect":
+                    #print '. This is a super secret encrypted chatroom' + add spy emoji, key emoji, and lock emoji
                     self.peer = peer_msg["from"]
                     self.out_msg += 'Request from ' + self.peer + '\n'
                     self.out_msg += 'You are connected with ' + self.peer
-                    self.out_msg += '. Chat away!\n\n'
+                    self.out_msg += '. This is a super secret encrypted chatroom 🔐\n'
                     self.out_msg += '------------------------------------\n'
                     self.state = S_CHATTING
 
