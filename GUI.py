@@ -24,6 +24,7 @@ import getpass
 import hashlib
 # from quicktranslate import get_translate_youdao
 import random
+from functools import partial
 
 
 
@@ -38,6 +39,32 @@ class GUI:
         self.socket = s
         self.my_msg = ""
         self.system_msg = ""
+        #library of emojis that stores unicodes of emojis
+        #emoji unicodes 
+        # smirk = '\U0001F60F'
+        #cry = '\U0001F62D'
+        #laugh = '\U0001F602'
+        #angry = '\U0001F620'
+        #sad = '\U0001F614'
+        #smile = '\U0001F603'
+        #heart = '\U00002764'
+        #kiss = '\U0001F618'
+        #tongue = '\U0001F61B'
+        #wink = '\U0001F609'
+        #sleep = '\U0001F634'
+        #sunglasses = '\U0001F60E'
+        #thinking = '\U0001F914'
+        #nerd = '\U0001F913'
+        #cool = '\U0001F60E'
+        #sick = '\U0001F912'
+        #dead = '\U0001F635'
+        #poop = '\U0001F4A9'
+        #ghost = '\U0001F47B'
+        #alien = '\U0001F47D'
+
+
+
+        
 
     def login(self):
         self.flag = False
@@ -169,10 +196,7 @@ class GUI:
             process.start()
     # The main layout of the chat
     def layout(self, name):
-        smirk = '\U0001F60F'
-        cry = '\U0001F62D'
-        laugh = '\U0001F602'
-        angry = '\U0001F620'
+        
         
         self.name = name
         # to show chat window
@@ -250,17 +274,18 @@ class GUI:
           
 
         #============================ emoji ===========================================
-        self.buttonEmoji_cry = Button(self.labelBottom,
-                                text= smirk,
-                                font="Helvetica 10 bold",
-                                width=20,
-                                bg="#ABB2B9",
-                                command=lambda: self.sendButton(smirk))
 
-        self.buttonEmoji_cry.place(relx=0.6,
-                             rely=0.008,
-                             relheight=0.06,
-                             relwidth=0.22)
+        self.buttonEmoji = tk.Button(
+            self.labelBottom,
+            text="\U0001f612",
+            font="Helvetica 10 bold",
+            width=20,
+            bg="#ABB2B9",
+            command=self.emoji_library
+        )
+
+        self.buttonEmoji.place(relx=0.6, rely=0.008, relheight=0.06, relwidth=0.22)
+
         #==============================================================================
         # create a scroll bar
         scrollbar = Scrollbar(self.textCons)
@@ -278,10 +303,43 @@ class GUI:
         
 
         # function to basically start the thread for sending messages
-    def sendButton(self, msg):
+    
+    def sendButton(self, action, emoji=None):
         self.textCons.config(state=DISABLED)
-        self.my_msg = msg
+        self.my_msg = action
+
+        if emoji is not None:
+            self.my_msg += f" {emoji}"  # Append emoji to the action if provided
+
         self.entryMsg.delete(0, END)
+
+    def send_emoji(self, emoji):
+        self.entryMsg.delete(0, END)
+        self.entryMsg.insert(END, emoji)
+
+        # Call your sendButton function with the selected emoji
+        self.sendButton("emoji", emoji)
+
+
+    def emoji_library(self):
+        self.emoji_window = tk.Toplevel(self.Window)
+        self.emoji_window.title("Emoji")
+        grid_size = 10
+
+        for i, emoji in enumerate(["😊", "❤️", "😂", "😎", "👍", "🎉", "🌟", "👋", "🤔", "🙌"]):
+            e_button = tk.Button(self.emoji_window, text=emoji, command=lambda e=emoji: self.send_emoji(e))
+            e_button.grid(row=i // grid_size, column=i % grid_size, sticky="nsew")
+            self.emoji_window.grid_columnconfigure(i % grid_size, weight=1)
+            self.emoji_window.grid_rowconfigure(i // grid_size, weight=1)
+
+    def send_emoji(self, emoji):
+        self.entryMsg.delete(0, END)
+        self.entryMsg.insert(END, emoji)
+
+        # Send the selected emoji to the server
+        self.sendButton("emoji", emoji) 
+    def close_emoji_window(self):
+        self.emoji_window.destroy()
 
     def proc(self):
         while True:

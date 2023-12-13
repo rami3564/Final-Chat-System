@@ -139,18 +139,13 @@ class ClientSM:
                         
                 elif my_msg[0] == 'snake':
                     self.play_snake_game()
-                elif my_msg=='(eh)':
-                        self.out_msg += "\U0001f600"
-                        mysend(self.s, json.dumps({"action":"emoji", "target":"\U0001f600"}))
-                elif my_msg=='(es)':
-                        self.out_msg += "\U0001f612"
-                        mysend(self.s, json.dumps({"action":"emoji", "target":"\U0001f612"}))
-                elif my_msg=='(eu)':
-                        self.out_msg += "\U0001f610"
-                        mysend(self.s, json.dumps({"action":"emoji", "target":"\U0001f610"}))
-                elif my_msg == 'emoji':
-                    self.out_msg += "\U0001f612"
-                    mysend(self.s, json.dumps({"action":"emoji", "target":"\U0001f612"}))
+
+                elif my_msg[0] == 'e':
+                # User wants to send an emoji
+                    emoji_code = my_msg[1:].strip()
+                    mysend(self.s, json.dumps({"action": "emoji_send", "message": emoji_code}))
+                    self.out_msg += 'You sent an emoji: ' + emoji_code + '\n\n'
+
 
                 else:
                     self.out_msg += menu
