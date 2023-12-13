@@ -86,18 +86,23 @@ class ClientSM:
             if len(my_msg) > 0:
 
                 if my_msg == 'q':
-                    self.out_msg += 'See you next time!\n'
+                    #See you next time and bye emoji
+
+                    self.out_msg += 'See you next time and bye 👋\n'
                     self.state = S_OFFLINE
 
                 elif my_msg == 'time':
                     mysend(self.s, json.dumps({"action":"time"}))
                     time_in = json.loads(myrecv(self.s))["results"]
-                    self.out_msg += "Time is: " + time_in + " " + emoji.emojize(":alarm_clock:") + "\n\n"
+                    # Time is" time_in + clock emoji 
+                    self.out_msg += "Time is: " + time_in + "🕒\n\n"
 
                 elif my_msg == 'who':
                     mysend(self.s, json.dumps({"action":"list"}))
                     logged_in = json.loads(myrecv(self.s))["results"]
-                    self.out_msg += 'Here are all the users in the system:\n'
+                    #Here are all the users in the system plus emoji with people
+                    
+                    self.out_msg += 'Here are all the users in the system 👥:\n' + logged_in + '\n\n'
                     self.out_msg += logged_in
 
                 elif my_msg[0] == 'c':
@@ -134,6 +139,18 @@ class ClientSM:
                         
                 elif my_msg[0] == 'snake':
                     self.play_snake_game()
+                elif my_msg=='(eh)':
+                        self.out_msg += "\U0001f600"
+                        mysend(self.s, json.dumps({"action":"emoji", "target":"\U0001f600"}))
+                elif my_msg=='(es)':
+                        self.out_msg += "\U0001f612"
+                        mysend(self.s, json.dumps({"action":"emoji", "target":"\U0001f612"}))
+                elif my_msg=='(eu)':
+                        self.out_msg += "\U0001f610"
+                        mysend(self.s, json.dumps({"action":"emoji", "target":"\U0001f610"}))
+                elif my_msg == 'emoji':
+                    self.out_msg += "\U0001f612"
+                    mysend(self.s, json.dumps({"action":"emoji", "target":"\U0001f612"}))
 
                 else:
                     self.out_msg += menu

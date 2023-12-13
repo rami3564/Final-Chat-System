@@ -149,10 +149,17 @@ class Server:
                 mysend(from_sock, json.dumps({"action":"poem", "results":poem}))
             
             #Emojis
-            elif msg["action"] == "emoji":
-                emoji_resultt = emoji.emojize(emoji_resullt)
-                mysend(from_sock, json.dumps({"action":"emoji", "results":emoji_extract}))
-
+            elif msg["action"] == "emoji_exchange":
+                 from_name = self.logged_sock2name[from_sock]
+                 the_guys = self.group.list_me(from_name)
+                 #said = msg["from"]+msg["message"]
+                 said2 = text_proc(msg["message"], from_name)
+                 self.indices[from_name].add_msg_and_index(said2)
+                 for g in the_guys[1:]:
+                     to_sock = self.logged_name2sock[g]
+                     self.indices[g].add_msg_and_index(said2)
+                     mysend(to_sock, json.dumps(
+                         {"action": "emoji_exchange", "from": msg["from"], "message": msg["message"]}))
 #==============================================================================
 #                 time
 #==============================================================================
